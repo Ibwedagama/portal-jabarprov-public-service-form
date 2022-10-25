@@ -6,10 +6,10 @@
     <div class="hero-overlay bg-opacity-60" />
     <div class="hero-content text-center text-neutral-content">
       <div class="max-w-lg">
-        <h1 class="text-5xl font-bold">
+        <h1 class="text-5xl font-bold uppercase">
           Portal Jabarprov
         </h1>
-        <h2 class="text-3xl font-bold mt-2">
+        <h2 class="text-2xl font-bold mt-4 mb-2 uppercase">
           Public Service Input Form
         </h2>
         <p class="py-6">
