@@ -349,12 +349,12 @@
           </h2>
 
           <BaseInputText
-            v-model="form.term_of_service.title"
+            v-model="form.tos.title"
             label="Judul Section"
             class="mb-4"
           />
           <BaseInputText
-            v-model="form.term_of_service.image"
+            v-model="form.tos.image"
             label="Poster/Infografis Cara Mengakses Layanan"
             class="mb-4"
           />
@@ -365,11 +365,11 @@
           >
             <div class="p-3 border rounded-md mb-4">
               <BaseTextArea
-                v-model="form.term_of_service.items[index -1].description"
+                v-model="form.tos.items[index -1].description"
                 label="Deskripsi"
               />
               <BaseInputText
-                v-model="form.term_of_service.items[index -1].link"
+                v-model="form.tos.items[index -1].link"
                 label="Link Contoh (Opsional)"
               />
               <div
@@ -392,6 +392,42 @@
             Tambah Panduan
           </button>
         </section>
+
+        <!-- infographic -->
+        <section class="mb-8">
+          <h2 class="mb-4 text-xl font-bold">
+            Infografis
+          </h2>
+
+          <div
+            v-for="index in infographicCount"
+            :key="`infographic-image-${index}`"
+          >
+            <BaseInputText
+              v-model="form.infographic.images[index -1]"
+              label="Gambar Infografis"
+            />
+            <div
+              v-if="index !== 1"
+              class="w-full flex justify-end"
+            >
+              <button
+                class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                @click="removeInfographic(index)"
+              >
+                Hapus
+              </button>
+            </div>
+          </div>
+
+          <button
+            class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+            @click="addNewInfographic"
+          >
+            Tambah Infografis
+          </button>
+        </section>
+
 
 
 
@@ -424,6 +460,7 @@ export default {
       facilityCount: 1,
       requirementCount: 1,
       termOfServiceCount: 1,
+      infographicCount: 1,
       form: {
         general_information: {
           name: "",
@@ -484,7 +521,7 @@ export default {
             }
           ]
         },
-        term_of_service: {
+        tos: {
           title: "",
           image: "",
           items: [
@@ -493,6 +530,9 @@ export default {
               description: ""
             }
           ]
+        },
+        infographic: {
+          images: []
         }
       }
     }
@@ -522,11 +562,14 @@ export default {
       this.requirementCount = this.requirementCount + 1
     },
     addNewTermOfService() {
-      this.form.term_of_service.items.push({
+      this.form.tos.items.push({
         link: "",
         description: ""
       })
       this.termOfServiceCount = this.termOfServiceCount + 1
+    },
+    addNewInfographic() {
+      this.infographicCount = this.infographicCount + 1
     },
     removeMediaImage (index) {
       this.mediaImageCount = this.mediaImageCount - 1
@@ -555,8 +598,13 @@ export default {
     },
     removeTOS(index) {
       this.termOfServiceCount = this.termOfServiceCount - 1
-      const newArr = this.form.term_of_service.items.filter((_, i) => i !== index - 1)
-      this.form.term_of_service.items = [...newArr]
+      const newArr = this.form.tos.items.filter((_, i) => i !== index - 1)
+      this.form.tos.items = [...newArr]
+    },
+    removeInfographic(index) {
+      this.infographicCount = this.infographicCount - 1
+      const newArr = this.form.infographic.images.filter((_, i) => i !== index - 1)
+      this.form.infographic.images = [...newArr]
     },
     handleUpdateOperationalHours(value) {
       this.form.general_information.operational_hours = value
