@@ -2,7 +2,10 @@
 import eslintPlugin from 'vite-plugin-eslint';
 
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/axios'],
+  modules: ['@nuxtjs/tailwindcss'],
+  publicRuntimeConfig: {
+    API_BASE_URL: process.env.API_BASE_URL
+  },
   vite: {
     plugins: [
       eslintPlugin()

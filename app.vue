@@ -470,12 +470,43 @@
 
 
         <div class="flex justify-center">
-          <button
-            class="btn btn-primary mx-auto"
-            @click="submitForm"
+          <!-- The button to open modal -->
+          <label
+            for="my-modal"
+            class="btn modal-button"
           >
-            Submit Form
-          </button>
+            SUBMIT FORM
+          </label>
+
+          <!-- Put this part before </body> tag -->
+          <input
+            id="my-modal"
+            type="checkbox"
+            class="modal-toggle"
+          >
+          <div class="modal overflow-hidden">
+            <div class="modal-box relative">
+              <label
+                for="my-modal"
+                class="btn btn-sm btn-circle absolute right-2 top-2"
+              >
+                ✕
+              </label>
+              <pre class="max-w-screen-sm">
+                {{ jsonFormData }}
+              </pre>
+
+              <div class="modal-action">
+                <label
+                  for="my-modal"
+                  class="btn"
+                  @click="submitForm"
+                >
+                  SUBMIT DATA
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -484,6 +515,7 @@
 
 <script>
 import { unitOptions, serviceTypeOptions, categoryOptions } from '@/constant'
+
 export default {
   name: 'HomePage',
   data() {
@@ -584,6 +616,17 @@ export default {
       }
     }
   },
+  computed: {
+    jsonFormData() {
+      return JSON.stringify(this.form, null, 2)
+    }
+  },
+  mounted() {
+    window.addEventListener('unload', this.confirmLeave)
+  },
+  beforeUnmount() {
+    window.removeEventListener('unload', this.confirmLeave)
+  },
   methods: {
     addNewAddress() {
      this.addressCount = this.addressCount + 1
@@ -668,9 +711,26 @@ export default {
     handleUpdateOperationalHours(value) {
       this.form.general_information.operational_hours = value
     },
-    submitForm () {
-      console.log(JSON.stringify(this.form))
-    }
-  },
+    async submitForm () {
+
+      try {
+        await fetch(`${import.meta.env.VITE_API_BASE_URL}/v1/service-public`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.form)
+        })
+      } catch (error) {
+        console.log(error)
+      } finally {
+        console.log(JSON.stringify(this.form))
+      }
+      
+    },
+    confirmLeave() {
+      return window.confirm('Do you really want to leave? you have unsaved changes!')
+    },
+  }
 }
 </script>
