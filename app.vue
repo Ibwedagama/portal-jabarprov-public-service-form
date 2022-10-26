@@ -296,6 +296,105 @@
           </button>
         </section>
 
+        <!-- Requirement -->
+        <section class="mb-8">
+          <h2 class="mb-4 text-xl font-bold">
+            Syarat Menggunakan Layanan
+          </h2>
+
+          <BaseInputText
+            v-model="form.requirement.title"
+            label="Judul Section"
+            class="mb-4"
+          />
+
+          <div
+            v-for="index in requirementCount"
+            :key="`requirement-section-${index}`"
+          >
+            <div class="p-3 border rounded-md mb-4">
+              <BaseTextArea
+                v-model="form.requirement.items[index -1].description"
+                label="Judul Fasilitas"
+              />
+              <BaseInputText
+                v-model="form.requirement.items[index -1].link"
+                label="Link Contoh (Opsional)"
+              />
+              <div
+                v-if="index !== 1"
+                class="w-full flex justify-end"
+              >
+                <button
+                  class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                  @click="removeRequirement(index)"
+                >
+                  Hapus
+                </button>
+              </div>
+            </div>
+          </div>
+          <button
+            class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+            @click="addNewRequirement"
+          >
+            Tambah Syarat
+          </button>
+        </section>
+
+        <!-- TOS -->
+        <section class="mb-8">
+          <h2 class="mb-4 text-xl font-bold">
+            Panduan Mengakses Layanan
+          </h2>
+
+          <BaseInputText
+            v-model="form.term_of_service.title"
+            label="Judul Section"
+            class="mb-4"
+          />
+          <BaseInputText
+            v-model="form.term_of_service.image"
+            label="Poster/Infografis Cara Mengakses Layanan"
+            class="mb-4"
+          />
+
+          <div
+            v-for="index in termOfServiceCount"
+            :key="`requirement-section-${index}`"
+          >
+            <div class="p-3 border rounded-md mb-4">
+              <BaseTextArea
+                v-model="form.term_of_service.items[index -1].description"
+                label="Deskripsi"
+              />
+              <BaseInputText
+                v-model="form.term_of_service.items[index -1].link"
+                label="Link Contoh (Opsional)"
+              />
+              <div
+                v-if="index !== 1"
+                class="w-full flex justify-end"
+              >
+                <button
+                  class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                  @click="removeTOS(index)"
+                >
+                  Hapus
+                </button>
+              </div>
+            </div>
+          </div>
+          <button
+            class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+            @click="addNewTermOfService"
+          >
+            Tambah Panduan
+          </button>
+        </section>
+
+
+
         <div class="flex justify-center">
           <button
             class="btn btn-primary mx-auto"
@@ -323,6 +422,8 @@ export default {
       mediaImageCount: 1,
       purposeCount: 1,
       facilityCount: 1,
+      requirementCount: 1,
+      termOfServiceCount: 1,
       form: {
         general_information: {
           name: "",
@@ -373,6 +474,25 @@ export default {
               image: ""
             }
           ]
+        },
+        requirement: {
+          title: "",
+          items: [
+            {
+              link: "",
+              description: ""
+            }
+          ]
+        },
+        term_of_service: {
+          title: "",
+          image: "",
+          items: [
+            {
+              link: "",
+              description: ""
+            }
+          ]
         }
       }
     }
@@ -394,6 +514,20 @@ export default {
       })
       this.facilityCount = this.facilityCount + 1
     },
+    addNewRequirement() {
+      this.form.requirement.items.push({
+        link: "",
+        description: ""
+      })
+      this.requirementCount = this.requirementCount + 1
+    },
+    addNewTermOfService() {
+      this.form.term_of_service.items.push({
+        link: "",
+        description: ""
+      })
+      this.termOfServiceCount = this.termOfServiceCount + 1
+    },
     removeMediaImage (index) {
       this.mediaImageCount = this.mediaImageCount - 1
       const newArr = this.form.general_information.media.images.filter((_, i) => i !== index - 1)
@@ -413,6 +547,16 @@ export default {
       this.facilityCount = this.facilityCount - 1
       const newArr = this.form.facility.items.filter((_, i) => i !== index - 1)
       this.form.facility.items = [...newArr]
+    },
+    removeRequirement(index) {
+      this.requirementCount = this.requirementCount - 1
+      const newArr = this.form.requirement.items.filter((_, i) => i !== index - 1)
+      this.form.requirement.items = [...newArr]
+    },
+    removeTOS(index) {
+      this.termOfServiceCount = this.termOfServiceCount - 1
+      const newArr = this.form.term_of_service.items.filter((_, i) => i !== index - 1)
+      this.form.term_of_service.items = [...newArr]
     },
     handleUpdateOperationalHours(value) {
       this.form.general_information.operational_hours = value
