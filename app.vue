@@ -428,7 +428,45 @@
           </button>
         </section>
 
+        <!-- FAQ -->
+        <section class="mb-8">
+          <h2 class="mb-4 text-xl font-bold">
+            Frequently Asked Question
+          </h2>
 
+          <div
+            v-for="index in faqCount"
+            :key="`faq-section-${index}`"
+          >
+            <div class="p-3 border rounded-md mb-4">
+              <BaseInputText
+                v-model="form.faq.items[index -1].question"
+                label="Pertanyaan"
+              />
+              <BaseTextArea
+                v-model="form.faq.items[index -1].answer"
+                label="Jawaban"
+              />
+              <div
+                v-if="index !== 1"
+                class="w-full flex justify-end"
+              >
+                <button
+                  class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                  @click="removeFAQ(index)"
+                >
+                  Hapus
+                </button>
+              </div>
+            </div>
+          </div>
+          <button
+            class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+            @click="addNewFAQ"
+          >
+            Tambah FAQ
+          </button>
+        </section>
 
 
         <div class="flex justify-center">
@@ -461,6 +499,7 @@ export default {
       requirementCount: 1,
       termOfServiceCount: 1,
       infographicCount: 1,
+      faqCount: 1,
       form: {
         general_information: {
           name: "",
@@ -533,6 +572,14 @@ export default {
         },
         infographic: {
           images: []
+        },
+        faq: {
+          items: [
+            {
+              question: "",
+              answer: ""
+            }
+          ]
         }
       }
     }
@@ -571,6 +618,13 @@ export default {
     addNewInfographic() {
       this.infographicCount = this.infographicCount + 1
     },
+    addNewFAQ() {
+      this.form.faq.items.push({
+        question: "",
+        answer: ""
+      })
+      this.faqCount = this.faqCount + 1
+    },
     removeMediaImage (index) {
       this.mediaImageCount = this.mediaImageCount - 1
       const newArr = this.form.general_information.media.images.filter((_, i) => i !== index - 1)
@@ -605,6 +659,11 @@ export default {
       this.infographicCount = this.infographicCount - 1
       const newArr = this.form.infographic.images.filter((_, i) => i !== index - 1)
       this.form.infographic.images = [...newArr]
+    },
+    removeFAQ(index) {
+      this.faqCount = this.faqCount - 1
+      const newArr = this.form.faq.items.filter((_, i) => i !== index - 1)
+      this.form.faq.items = [...newArr]
     },
     handleUpdateOperationalHours(value) {
       this.form.general_information.operational_hours = value
