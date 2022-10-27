@@ -1,6 +1,6 @@
 export const unitOptions = ['Disdukcapil']
 
-export const categoryOptions = ['kependudukan', 'pajak', 'kesehatan']
+export const categoryOptions = ['kependudukan', 'perpajakan', 'kesehatan', 'pendidikan', 'sosial']
 
 export const serviceTypeOptions = [
   {
