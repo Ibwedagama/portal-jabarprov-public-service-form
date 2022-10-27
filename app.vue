@@ -95,14 +95,38 @@
                 Tambah Alamat
               </button>
 
-
-              <BaseInputText
-                v-model="form.general_information.phone"
-                type="number"
-                label="Nomor Telepon"
-                placeholder="Masukkan no. telp"
-                class="mb-4"
-              />
+              <!-- Phone -->
+              <div>
+                <div
+                  v-for="index in phoneCount"
+                  :key="`phone-input-${index}`"
+                  class="w-full mb-4"
+                >
+                  <BaseInputText
+                    v-model="form.general_information.phone[index - 1]"
+                    label="Nomor Telepon"
+                    placeholder="Masukkan no. telp"
+                    class="mb-4"
+                  />
+                  <div
+                    v-if="index !== 1"
+                    class="w-full flex justify-end"
+                  >
+                    <button
+                      class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                      @click="removePhone(index)"
+                    >
+                      Hapus
+                    </button>
+                  </div>
+                </div>
+                <button
+                  class="btn btn-outline btn-primary btn-sm mb-4"
+                  @click="addNewPhone"
+                >
+                  Tambah Telepon
+                </button>
+              </div>
 
               <OperationalHours @update-value="handleUpdateOperationalHours" />
             </div>
@@ -551,6 +575,7 @@ export default {
       termOfServiceCount: 1,
       infographicCount: 1,
       faqCount: 1,
+      phoneCount: 1,
       successSubmitForm: false,
       form: {
         general_information: {
@@ -560,7 +585,7 @@ export default {
           category: "",
           addresses: [],
           unit: "",
-          phone: "",
+          phone: [],
           logo: "",
           operational_hours: [
             { start: null, end: null },
@@ -687,6 +712,9 @@ export default {
       })
       this.faqCount = this.faqCount + 1
     },
+    addNewPhone() {
+      this.phoneCount = this.phoneCount + 1
+    },
     removeMediaImage (index) {
       this.mediaImageCount = this.mediaImageCount - 1
       const newArr = this.form.general_information.media.images.filter((_, i) => i !== index - 1)
@@ -727,6 +755,11 @@ export default {
       const newArr = this.form.faq.items.filter((_, i) => i !== index - 1)
       this.form.faq.items = [...newArr]
     },
+    removePhone(index) {
+      this.phoneCount = this.phoneCount - 1
+      const newArr = this.form.general_information.phone.filter((_, i) => i !== index - 1)
+      this.form.general_information.phone = [...newArr]
+    },
     handleUpdateOperationalHours(value) {
       this.form.general_information.operational_hours = value
     },
@@ -736,7 +769,8 @@ export default {
         await fetch(`${import.meta.env.VITE_API_BASE_URL}/v1/service-public`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_API_TOKEN}`
           },
           body: JSON.stringify(this.form)
         })
