@@ -315,7 +315,7 @@
             <div class="p-3 border rounded-md mb-4">
               <BaseTextArea
                 v-model="form.requirement.items[index -1].description"
-                label="Judul Fasilitas"
+                label="Deskripsi Syarat Layanan"
               />
               <BaseInputText
                 v-model="form.requirement.items[index -1].link"
