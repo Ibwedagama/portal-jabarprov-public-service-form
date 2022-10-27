@@ -468,8 +468,15 @@
           </button>
         </section>
 
-
+        <!-- Confirmation Modal -->
         <div class="flex justify-center">
+          <button
+            class="btn btn-outline btn-primary mr-6"
+            @click="resetForm"
+          >
+            RESET FORM
+          </button>
+
           <!-- The button to open modal -->
           <label
             for="my-modal"
@@ -508,6 +515,18 @@
             </div>
           </div>
         </div>
+
+        <!-- Success Toast -->
+        <div
+          v-show="successSubmitForm"
+          class="toast toast-top toast-end"
+        >
+          <div class="alert alert-success">
+            <div>
+              <span>Berhasil menyimpan data</span>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   </main>
@@ -532,6 +551,7 @@ export default {
       termOfServiceCount: 1,
       infographicCount: 1,
       faqCount: 1,
+      successSubmitForm: false,
       form: {
         general_information: {
           name: "",
@@ -721,6 +741,12 @@ export default {
           },
           body: JSON.stringify(this.form)
         })
+
+        this.successSubmitForm = true
+
+        setTimeout(() => {
+          this.resetForm()
+        }, 1000);
       } catch (error) {
         console.log(error)
       } finally {
@@ -731,6 +757,11 @@ export default {
     confirmLeave() {
       return window.confirm('Do you really want to leave? you have unsaved changes!')
     },
+    resetForm() {
+      if (window.confirm("Apakah Anda ingin merefresh form?")) {
+        location.reload();
+      }
+    }
   }
 }
 </script>
