@@ -642,10 +642,9 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('unload', this.confirmLeave)
-  },
-  beforeUnmount() {
-    window.removeEventListener('unload', this.confirmLeave)
+    window.onbeforeunload = function (e) {
+        return "Please click 'Stay on this Page' if you did this unintentionally";
+    };
   },
   methods: {
     addNewAddress() {
@@ -754,13 +753,8 @@ export default {
       }
       
     },
-    confirmLeave() {
-      return window.confirm('Do you really want to leave? you have unsaved changes!')
-    },
     resetForm() {
-      if (window.confirm("Apakah Anda ingin merefresh form?")) {
-        location.reload();
-      }
+      location.reload();
     }
   }
 }
