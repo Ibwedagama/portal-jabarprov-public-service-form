@@ -13,7 +13,7 @@
           <h2 class="mb-4 text-xl font-bold">
             Informasi Umum
           </h2>
-          <div class="grid grid-cols-2 divide-x-2">
+          <div class="grid grid-cols-1 lg:grid-cols-2 lg:divide-x-2">
             <div class="p-12 pt-4 pl-0 w-full">
               <BaseInputText
                 v-model="form.general_information.name"
@@ -133,7 +133,7 @@
           </div>
         </section>
 
-        <div class="grid grid-cols-2 divide-x-2">
+        <div class="grid grid-cols-1 lg:grid-cols-2 lg:divide-x-2">
           <section class="mb-8 pr-8">
             <h2 class="mb-4 text-xl font-bold">
               Link
