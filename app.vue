@@ -39,7 +39,7 @@
               <BaseSelect
                 v-model="form.general_information.unit"
                 :options="unitOptions"
-                label="Unit"
+                label="Unit/Dinas"
                 class="mb-4"
               />
 
@@ -506,7 +506,7 @@
             for="my-modal"
             class="btn modal-button"
           >
-            SUBMIT FORM
+            {{ submitStatus === 'LOADING' ? 'LOADING...' : 'SUBMIT FORM' }}
           </label>
 
           <!-- Put this part before </body> tag -->
