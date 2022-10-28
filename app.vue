@@ -4,7 +4,7 @@
       <a class="btn btn-ghost normal-case text-xl">Portal Jabarprov</a>
     </div>
     <div class="w-full max-w-screen-xl container mx-auto p-8 bg-white mt-[80px] rounded-xl shadow-sm">
-      <form @submit.prevent="">
+      <form @submit.prevent="submitForm">
         <section class="mb-8">
           <h1 class="mb-8 text-3xl font-bold">
             Portal Jabarprov Input Form
@@ -20,6 +20,7 @@
                 label="Nama Layanan"
                 placeholder="Masukkan nama lengkap"
                 class="mb-4"
+                required
               />
 
               <BaseInputText
@@ -27,6 +28,7 @@
                 label="Nama Alias"
                 placeholder="Masukkan nama alias"
                 class="mb-4"
+                required
               />
 
               <BaseInputText
@@ -62,6 +64,7 @@
                 label="Deskripsi Layanan"
                 placeholder="Deskripsi Layanan"
                 class="mb-4"
+                required
               />
             </div>
 
@@ -509,7 +512,6 @@
             {{ submitStatus === 'LOADING' ? 'LOADING...' : 'SUBMIT FORM' }}
           </label>
 
-          <!-- Put this part before </body> tag -->
           <input
             id="my-modal"
             type="checkbox"
@@ -528,13 +530,13 @@
               </pre>
 
               <div class="modal-action">
-                <label
+                <button
                   for="my-modal"
                   class="btn"
-                  @click="submitForm"
+                  type="submit"
                 >
                   SUBMIT DATA
-                </label>
+                </button>
               </div>
             </div>
           </div>
