@@ -1,4 +1,4 @@
-export const unitOptions = ['Disdukcapil']
+export const unitOptions = ['Dinas Kesehatan', 'Dinas Kependudukan dan Pencatatan Sipil', 'Dinas Sosial', 'Dinas Pendidikan', 'Badan Pendapatan Daerah']
 
 export const categoryOptions = ['kependudukan', 'perpajakan', 'kesehatan', 'pendidikan', 'sosial']
 

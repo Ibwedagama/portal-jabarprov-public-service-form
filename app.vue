@@ -706,7 +706,7 @@ export default {
   },
   methods: {
     addNewAddress() {
-     this.addressCount = this.addressCount + 1
+      this.addressCount = this.addressCount + 1
     },
     addNewMediaImage() {
       this.mediaImageCount = this.mediaImageCount + 1
