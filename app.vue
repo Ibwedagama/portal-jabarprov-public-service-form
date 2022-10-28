@@ -25,7 +25,7 @@
 
               <BaseInputText
                 v-model="form.general_information.alias"
-                label="Nama Alias"
+                label="Nama Alias/Singkatan (Contoh: SIDATUK)"
                 placeholder="Masukkan nama alias"
                 class="mb-4"
                 required
@@ -49,6 +49,7 @@
                 v-model="form.general_information.category"
                 :options="categoryOptions"
                 label="Kategori Layanan"
+                required
                 class="mb-4"
               />
 
@@ -64,7 +65,6 @@
                 label="Deskripsi Layanan"
                 placeholder="Deskripsi Layanan"
                 class="mb-4"
-                required
               />
             </div>
 

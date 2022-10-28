@@ -4,6 +4,7 @@
       <span class="label-text">{{ label }}</span>
     </label>
     <select
+      v-bind="$attrs"
       v-model="mValue"
       class="select select-bordered select-primary"
       @change="$emit('update:modelValue', $event.target.value)"
