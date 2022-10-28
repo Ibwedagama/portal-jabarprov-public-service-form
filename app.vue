@@ -542,12 +542,24 @@
 
         <!-- Success Toast -->
         <div
-          v-show="successSubmitForm"
+          v-show="submitStatus === 'SUCCESS'"
           class="toast toast-top toast-end"
         >
           <div class="alert alert-success">
             <div>
               <span>Berhasil menyimpan data</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Toast -->
+        <div
+          v-show="submitStatus === 'ERROR'"
+          class="toast toast-top toast-end"
+        >
+          <div class="alert alert-error">
+            <div>
+              <span>Gagal submit data!</span>
             </div>
           </div>
         </div>
@@ -576,7 +588,7 @@ export default {
       infographicCount: 1,
       faqCount: 1,
       phoneCount: 1,
-      successSubmitForm: false,
+      submitStatus: null,
       form: {
         general_information: {
           name: "",
@@ -764,6 +776,8 @@ export default {
       this.form.general_information.operational_hours = value
     },
     submitForm () {
+      this.submitStatus = "LOADING"
+
       fetch(`${import.meta.env.VITE_API_BASE_URL}/v1/service-public`, {
           method: 'POST',
           headers: {
@@ -778,14 +792,18 @@ export default {
           return Promise.reject(response);
         }
       }).then(() => {
-        this.successSubmitForm = true
+        this.submitStatus = "SUCCESS"
         setTimeout(() => {
         this.resetForm()
         }, 1000);
       }).catch((error) => {
+        this.submitStatus = "ERROR"
         console.log(error)
       }).finally(() => {
         console.log(JSON.stringify(this.form))
+        setTimeout(() => {
+        this.submitStatus = null
+        }, 3000);
       })
     },
     resetForm() {
