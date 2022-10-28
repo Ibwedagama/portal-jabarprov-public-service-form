@@ -85,6 +85,7 @@
                 >
                   <button
                     class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                    type="button"
                     @click="removeAddress(index)"
                   >
                     Hapus
@@ -93,6 +94,7 @@
               </div>
               <button
                 class="btn btn-outline btn-primary btn-sm mb-4"
+                type="button"
                 @click="addNewAddress"
               >
                 Tambah Alamat
@@ -117,6 +119,7 @@
                   >
                     <button
                       class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                      type="button"
                       @click="removePhone(index)"
                     >
                       Hapus
@@ -125,6 +128,7 @@
                 </div>
                 <button
                   class="btn btn-outline btn-primary btn-sm mb-4"
+                  type="button"
                   @click="addNewPhone"
                 >
                   Tambah Telepon
@@ -219,6 +223,7 @@
               >
                 <button
                   class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                  type="button"
                   @click="removeMediaImage(index)"
                 >
                   Hapus
@@ -228,6 +233,7 @@
 
             <button
               class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+              type="button"
               @click="addNewMediaImage"
             >
               Tambah Gambar
@@ -262,6 +268,7 @@
             >
               <button
                 class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                type="button"
                 @click="removePurpose(index)"
               >
                 Hapus
@@ -271,6 +278,7 @@
 
           <button
             class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+            type="button"
             @click="addNewPurpose"
           >
             Tambah Alasan
@@ -308,6 +316,7 @@
               >
                 <button
                   class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                  type="button"
                   @click="removeFacility(index)"
                 >
                   Hapus
@@ -317,6 +326,7 @@
           </div>
           <button
             class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+            type="button"
             @click="addNewFacility"
           >
             Tambah Fasilitas
@@ -354,6 +364,7 @@
               >
                 <button
                   class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                  type="button"
                   @click="removeRequirement(index)"
                 >
                   Hapus
@@ -363,6 +374,7 @@
           </div>
           <button
             class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+            type="button"
             @click="addNewRequirement"
           >
             Tambah Syarat
@@ -405,6 +417,7 @@
               >
                 <button
                   class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                  type="button"
                   @click="removeTOS(index)"
                 >
                   Hapus
@@ -414,6 +427,7 @@
           </div>
           <button
             class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+            type="button"
             @click="addNewTermOfService"
           >
             Tambah Panduan
@@ -440,6 +454,7 @@
             >
               <button
                 class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                type="button"
                 @click="removeInfographic(index)"
               >
                 Hapus
@@ -449,6 +464,7 @@
 
           <button
             class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+            type="button"
             @click="addNewInfographic"
           >
             Tambah Infografis
@@ -480,6 +496,7 @@
               >
                 <button
                   class="btn btn-outline btn-error btn-sm mt-4 ml-auto"
+                  type="button"
                   @click="removeFAQ(index)"
                 >
                   Hapus
@@ -489,6 +506,7 @@
           </div>
           <button
             class="btn btn-outline btn-primary btn-sm mt-4 mb-4"
+            type="button"
             @click="addNewFAQ"
           >
             Tambah FAQ
@@ -499,6 +517,7 @@
         <div class="flex justify-center">
           <button
             class="btn btn-outline btn-primary mr-6"
+            type="button"
             @click="resetForm"
           >
             RESET FORM
