@@ -4,6 +4,7 @@
       <span class="label-text">{{ label }}</span>
     </label> 
     <textarea
+      v-bind="$attrs"
       v-model="mValue"
       class="textarea textarea-bordered textarea-primary h-24"
       :placeholder="placeholder"

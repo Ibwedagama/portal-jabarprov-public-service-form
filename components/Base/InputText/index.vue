@@ -4,6 +4,7 @@
       <span class="label-text">{{ label }}</span>
     </label>
     <input
+      v-bind="$attrs"
       v-model="mValue"
       :type="type"
       :placeholder="placeholder"
