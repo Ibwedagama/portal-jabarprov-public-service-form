@@ -182,7 +182,7 @@
               />
               <BaseInputText
                 v-model="form.general_information.social_media.twitter"
-                label="App Store"
+                label="Twitter"
               />
               <BaseInputText
                 v-model="form.general_information.social_media.youtube"
