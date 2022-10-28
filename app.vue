@@ -764,35 +764,6 @@ export default {
       this.form.general_information.operational_hours = value
     },
     submitForm () {
-
-      // try {
-      //   const request = await fetch(`${import.meta.env.VITE_API_BASE_URL}/v1/service-public`, {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //       'Authorization': `Bearer ${import.meta.env.VITE_API_TOKEN}`
-      //     },
-      //     body: JSON.stringify(this.form)
-      //   })
-
-      //   const response = request.json()
-      //   console.log(response)
-
-      //   if (response.ok) {
-      //     this.successSubmitForm = true
-
-      //     setTimeout(() => {
-      //     this.resetForm()
-      //   }, 1000);
-      //   } else {
-      //     throw new Error(response)
-      //   }
-      // } catch (error) {
-      //   console.log(error)
-      // } finally {
-      //   console.log(JSON.stringify(this.form))
-      // }
-
       fetch(`${import.meta.env.VITE_API_BASE_URL}/v1/service-public`, {
           method: 'POST',
           headers: {
