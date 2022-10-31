@@ -722,6 +722,9 @@ export default {
     isFAQEmpty() {
       return this.form.faq.items.every(item => item.question === "" && item.answer === "")
     },
+    isOperationalHoursEmpty () {
+      return this.form.general_information.operational_hours.every(item => (item.start === null || item.start === "") && (item.end === null || item.end === ""))
+    }
   },
   mounted() {
     window.onbeforeunload = function (e) {
@@ -858,7 +861,10 @@ export default {
     },
     getFormData() {
       const formData = {
-        general_information: {...this.form.general_information},
+        general_information: {
+          ...this.form.general_information,
+          operational_hours: this.isOperationalHoursEmpty ? [] : this.form.general_information.operational_hours
+        },
         purpose: this.isPurposeEmpty ? {} : {...this.form.purpose},
         facility: this.isFacilityEmpty ? {} : {...this.form.facility},
         requirement: this.isRequirementEmty ? {} : {...this.form.requirement},
