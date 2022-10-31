@@ -135,7 +135,7 @@ export default {
       const formData = new FormData();
       formData.append('file', this.file, this.file.name); 
 
-      const fetchRequest = fetch(`${import.meta.env.VITE_API_BASE_URL}/v1/media/upload`, {
+      const fetchRequest = fetch(`${import.meta.env.VITE_API_BASE_URL}/v1/media/upload?domain=public-service`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${import.meta.env.VITE_API_TOKEN}`
