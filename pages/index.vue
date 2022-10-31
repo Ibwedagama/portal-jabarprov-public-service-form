@@ -534,6 +534,7 @@
           <label
             for="my-modal"
             class="btn modal-button"
+            @click.stop="setJSONFormData"
           >
             {{ submitStatus === 'LOADING' ? 'LOADING...' : 'SUBMIT FORM' }}
           </label>
@@ -698,13 +699,29 @@ export default {
             }
           ]
         }
-      }
+      },
+      jsonFormData: {}
     }
   },
   computed: {
-    jsonFormData() {
-      return JSON.stringify(this.form, null, 2)
-    }
+    isPurposeEmpty() {
+      return this.form.purpose.items.every(item => item === "")
+    },
+    isFacilityEmpty() {
+      return this.form.facility.items.every(item => item.title === "" && item.image === "")
+    },
+    isRequirementEmty() {
+      return this.form.requirement.items.every(item => item.link === "" && item.description === "")
+    },
+    isTOSEmpty() {
+      return this.form.tos.items.every(item => item.link === "" && item.description === "")
+    },
+    isInfographicEmpty() {
+      return this.form.infographic.images.every(item => item === "")
+    },
+    isFAQEmpty() {
+      return this.form.faq.items.every(item => item.question === "" && item.answer === "")
+    },
   },
   mounted() {
     window.onbeforeunload = function (e) {
@@ -806,13 +823,15 @@ export default {
     submitForm () {
       this.submitStatus = "LOADING"
 
+      const formData = this.getFormData()
+
       fetch(`${import.meta.env.VITE_API_BASE_URL}/v1/service-public`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${import.meta.env.VITE_API_TOKEN}`
           },
-          body: JSON.stringify(this.form)
+          body: JSON.stringify(formData)
       }).then((response) => {
         if (response.ok) {
           return response.json()
@@ -836,7 +855,23 @@ export default {
     },
     resetForm() {
       location.reload();
-    }
+    },
+    getFormData() {
+      const formData = {
+        general_information: {...this.form.general_information},
+        purpose: this.isPurposeEmpty ? {} : {...this.form.purpose},
+        facility: this.isFacilityEmpty ? {} : {...this.form.facility},
+        requirement: this.isRequirementEmty ? {} : {...this.form.requirement},
+        tos: this.isTOSEmpty ? {} : {...this.form.tos},
+        infographic: this.isInfographicEmpty ? {} : {...this.form.infographic},
+        faq: this.isFAQEmpty ? {} : {...this.form.faq},
+      }
+
+      return formData
+    },
+    setJSONFormData() {
+      this.jsonFormData = JSON.stringify(this.getFormData(), null, 2)
+    },
   }
 }
 </script>
