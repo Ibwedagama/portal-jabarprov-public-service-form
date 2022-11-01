@@ -155,6 +155,12 @@
 
             <div>
               <BaseInputText
+                v-model="form.general_information.email"
+                label="Email"
+                type="email"
+                placeholder="Link Email"
+              />
+              <BaseInputText
                 v-model="form.general_information.link.website"
                 label="Website"
                 placeholder="Link website"
@@ -628,6 +634,7 @@ export default {
           unit: "",
           phone: [],
           logo: "",
+          email: "",
           operational_hours: [
             { start: null, end: null },
             { start: null, end: null },
